@@ -1,0 +1,57 @@
+Exo1
+#2.(i)
+Mo [] [a,b,c] [] [(a,[]),(b,[]),(c,[])] []
+Par la réflexivité, tout monde sont supprimés
+
+#2.(ii)
+Il n'y a aucun changement
+
+#3.(i)
+upd_pa model0 (Kn b (Ng holds_b_jaune))
+Mo [('r','v','j'),('j','r','v'),('j','v','r'),('v','r','j')] [a,b,c] [] [(a,[[('r','v','j')],[('j','r','v'),('j','v','r')],[('v','r','j')]]),(b,[[('r','v','j'),('j','v','r')],[('v','r','j'),('j','r','v')]]),(c,[[('r','v','j'),('v','r','j')],[('j','v','r')],[('j','r','v')]])] []
+
+upd_pa model0 (Ng (Kn a holds_b_rouge))
+Mo [('r','v','j'),('r','j','v'),('j','r','v'),('j','v','r'),('v','r','j'),('v','j','r')] [a,b,c] [] [(a,[[('r','v','j'),('r','j','v')],[('j','r','v'),('j','v','r')],[('v','r','j'),('v','j','r')]]),(b,[[('r','v','j'),('j','v','r')],[('r','j','v'),('v','j','r')],[('v','r','j'),('j','r','v')]]),(c,[[('r','v','j'),('v','r','j')],[('j','v','r'),('v','j','r')],[('j','r','v'),('r','j','v')]])] []
+
+upd_pa model0 (Kn a (Ng holds_a_jaune))
+Mo [('r','v','j'),('r','j','v'),('v','r','j'),('v','j','r')] [a,b,c] [] [(a,[[('r','v','j'),('r','j','v')],[('v','r','j'),('v','j','r')]]),(b,[[('r','v','j')],[('r','j','v'),('v','j','r')],[('v','r','j')]]),(c,[[('r','v','j'),('v','r','j')],[('v','j','r')],[('r','j','v')]])] []
+
+Conclusion: par intersection, il nous reste que le monde (r, v, j) et (v, r, j) et aussi un agent c entre ces 2 mondes. Ils ne sont pas distinguable selons les trois annonces. On ne sais pas les cartes de a et de b.
+
+#3.(ii)
+upd_pa model0 (Kn c (Ng holds_c_jaune))
+Mo [('r','j','v'),('j','r','v'),('j','v','r'),('v','j','r')] [a,b,c] [] [(a,[[('r','j','v')],[('j','r','v'),('j','v','r')],[('v','j','r')]]),(b,[[('j','v','r')],[('r','j','v'),('v','j','r')],[('j','r','v')]]),(c,[[('j','v','r'),('v','j','r')],[('j','r','v'),('r','j','v')]])] []
+
+tous le monde accessible par joueur c ayant le joueur c possédant carte jaune sont supprimés.???
+
+upd_pa model0 (Ng (Kn a (Kn b holds_b_jaune)))???
+Mo [('r','v','j'),('r','j','v'),('j','r','v'),('j','v','r'),('v','r','j'),('v','j','r')] [a,b,c] [] [(a,[[('r','v','j'),('r','j','v')],[('j','r','v'),('j','v','r')],[('v','r','j'),('v','j','r')]]),(b,[[('r','v','j'),('j','v','r')],[('r','j','v'),('v','j','r')],[('v','r','j'),('j','r','v')]]),(c,[[('r','v','j'),('v','r','j')],[('j','v','r'),('v','j','r')],[('j','r','v'),('r','j','v')]])] []
+Il n'y a pas de changement.
+
+upd_pa model0 (Kn c (Ng holds_b_verte))
+Mo [('r','j','v'),('j','r','v')] [a,b,c] [] [(a,[[('r','j','v')],[('j','r','v')]]),(b,[[('r','j','v')],[('j','r','v')]]),(c,[[('j','r','v'),('r','j','v')]])] []
+a, b et c sait que c'est que c possède la carte verte mais ils ne savent pas pour les 2 autres.
+
+Conclusion: a et b savent quelle carte possède chacun mais c ne sait qu'il possède la carte verte mais pas les cartes des autres.
+
+#4.
+Non, car on fait l'intersection pour chaque résultat intermédiaire et l'intersection ne dépend pas de l'ordre.
+
+
+Exo2
+Q1)
+Albert ne peut pas distinguer la date donc (15 mai, 16 mai, 19 mai), (17 juin, 18 juin), (14 juillet, 16 juillet)
+et (14 aout, 15 aout, 17 aout) sont reliés par la relation "Albert" mutuellement à l'intérieur respectivement,
+comme Bernard confond le mois (14 juillet, 14 aout), (15 mai, 15 aout), (16 mai, 16 juillet) et (17 juin, 17 aout)
+sont reliés par la relation "Bernard" mutuellement à l'intérieur respectivement
+Q2)
+Si il n'y a pas de relation d'agent i le relie avec un autre monde.
+Q3)
+(i) les mondes appartenant au mois mai et juin sont supprimé car Albert connaît que Bernard ne le saît pas, sinon,
+Bernard le connaît bien si l'anniversaire et (19 mai) ou (18 juin).
+(ii) les mondes (14 juillet) et (14 aout) sont supprimés car sinon, Bernard ne peut pas les distinguer
+(iii) les mondes (15 aout) et (17 aout) sont supprimés car sinon, Albert ne peut pas les distinguer
+Conclusion => in ne nous reste que (16 juillet), ce qui est l'anniversaire.
+Q4)
+Oui, dans l'annonce (i) "je ne sais pas quelle est quelle est la date d'anniversaire de Cheryl" ne permet pas de supprimer
+les mondes.
