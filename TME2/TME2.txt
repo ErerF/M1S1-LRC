@@ -1,0 +1,23 @@
+3776021@ppti-24-302-11:/users/nfs/Etu1/3776021/LRC/TME2$ swipl
+?- ['reponse.pl'].
+true.
+
+?- trace.
+true.
+
+[trace]  ?- r(a,b).
+   Call: (7) r(a, b) ? creep
+   Exit: (7) r(a, b) ? creep
+true.
+
+[trace]  ?- r(f(f(a)),b).
+   Call: (7) r(f(f(a)), b) ? creep
+   Call: (8) p(f(a), b) ? creep
+   Call: (9) r(a, b) ? creep
+   Exit: (9) r(a, b) ? creep
+   Exit: (8) p(f(a), b) ? creep
+   Exit: (7) r(f(f(a)), b) ? creep
+true.
+
+[trace]  ?- notrace.
+true.

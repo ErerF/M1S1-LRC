@@ -1,0 +1,8 @@
+/*Exercice 2*/
+subsS1(canari, animal).
+/*true*/
+subsS1(chat, viv).
+/*true*/
+subsS1(chien, souris).
+/*false*/ le programme ne s'arrete pas.
+

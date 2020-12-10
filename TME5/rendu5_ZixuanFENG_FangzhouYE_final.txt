@@ -1,0 +1,110 @@
+I) Vérification de modèles dans la logique K
+
+1. On prend l'exemple de l'exo 1 du TD et on vérifie ici M,w4 |= []b and []a
+   D'aborad, la ligne à vérifier s'écrit comme: 
+			add w4 isItTrue and nec B nec A
+   Pour commencer, le programme utilise And_Top_Down et Nec_top_down pour distribuer les conditions à vérifier dans les sucesseurs de w4, qui sont w2 et w3.
+   Donc, il faut vérifier isItTrueB et isItTrueA pour w2 et w3. Il applique Atom_True_Bottom_Up.
+   Comme il voit que w2 vérifie B mais pas A et w3 vérifie A mais pas B, il applique Atom_Not_True_Bottom_Up, Nec_Not_True_Bottom_Up, And_Left_Not_True_Bottom_Up et And_Right_Not_True_Bottom_Up pour combiner les valeurs "boolénnes"(yes/no) et rendre le résultat.
+   En conclusion, le résultat final est No.
+
+2. Le monde est:
+createNewNode w1
+createNewNode w2
+link w1 w2 R
+link w2 w2 R
+add w1 Q
+add w2 P
+add w1 isItTrue and not P nec pos P
+add w1 isItTrue and Q pos not Q
+add w2 isItTrue and not P nec pos P
+add w2 isItTrue and Q pos not Q
+
+   Il nous retourne Yes.
+
+3.
+Connectors:
+name:imp
+arity:2
+display:_->_
+priority:0
+
+Rules:
+Imp_Top_Down:
+	conditions:	hasElement w isItTrue imp variable A variable B
+	actions:	add w isItTrue or not variable A variable B
+Imp_True_Bottom_Up:
+	conditions:	hasElement w isItTrue imp variable A variable B
+			isMarkedExpression w isItTrue or not variable A variable B Yes
+	actions:	markExpression w isItTrue imp variable A variable B Yes
+Imp_Not_True_Bottom_Up:
+	conditions:	hasElement w isItTrue imp variable A variable B
+			isMarkedExpression w isItTrue or not variable A variable B No
+	actions:	markExpression w isItTrue imp variable A variable B No
+
+Strategies:
+	Ajouter dans "Top_Down_Strategy": Imp_Top_Down
+	Ajouter dans "Bottom_Up_Strategy": Imp_True_Bottom_Up
+					   Imp_Not_True_Bottom_Up
+
+Quand on teste P->[](Q or P) dans le monde créé de la question 2, on ajoute dans le règle "Exo2":
+	add w1 isItTrue imp P nec or Q P
+	add w2 isItTrue imp P nec or Q P
+Il nous retourne Yes.
+
+
+II) Satisfiabilité dans la logique K
+1. Insatisfiable.
+    Pour le noeud actuel (w1) satisfait <>P and []not P, il faut qu'il existe un successeur satisfait P et tous ses successeurs est not P. Donc il crée un nouveau noeud w2 qui est successeur de w1 et doit satisfaire les 2 conditions. Ensuite, comme il y a P et not P, il nous renvoie un False. Donc, cette formule est insatisfiable.
+
+2）
+(a) Satisfiable mais pas valide. 
+     satisfaite situation: w1(P)--------R------->w2(Q)
+     non satisfaite situation: w1(not P)
+
+(b) Satisfiable mais pas valide.
+      satisfaite: w1(<><><>P)----R----->w2(<><>P)------R----->w3(<>P)------R------>w4(P)
+      non satisfaite: w1(P) ou w1(not P)
+
+(c) Satisfiable mais pas valide
+      satisfaite: w1(not P) ou w1(Q) ou w1-----R----->w2(Q) ou w1-----R----->w2(not P)
+      non satisfaite: w1(P)
+
+3)Valide
+--Quand on teste si c'est satisfiable, le programme nous propose 3 mondes possibles:
+   1. w1-----R----->w2(P)
+   2. w1-----R----->w2(not P)
+   3. w1
+--Quand on teste pour not([](p->q)->([]p->[]q)), il nous dit c'est insatisfiable car on peut pas avoir (P and not P) ni (Q and not Q) dans un noeud.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
